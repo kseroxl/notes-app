@@ -9,7 +9,7 @@ const NavBar: React.FC = () => {
       <div className="grid-box">
         <div id="logo">
           <a href="/" id="logo-icon">
-            App
+            Notes
           </a>
           <span className="logo-heart">
             <FontAwesomeIcon icon={faCheck} />
@@ -17,15 +17,15 @@ const NavBar: React.FC = () => {
         </div>
         <ul>
           <li>
-            <a href="/">Home</a>
+            <a href="/">Education</a>
             <span className="underline"></span>
           </li>
           <li>
-            <a href="/">About us</a>
+            <a href="/">Sport</a>
             <span className="underline"></span>
           </li>
           <li>
-            <a href="/">Contact us</a>
+            <a href="/">Art</a>
             <span className="underline"></span>
           </li>
         </ul>

@@ -2,7 +2,11 @@ import React, { useRef } from "react";
 // import {useState} from "react";
 import "./InputField.css";
 
-const InputField: React.FC<{ onAdd(title: string): void }> = () => {
+interface IInputForm {
+  onAdd(title: string): void;
+}
+
+const InputField: React.FC<IInputForm> = (props) => {
   const ref = useRef<HTMLInputElement>(null);
   //   const [state, setstate] = useState<string>("");
   //   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -10,7 +14,7 @@ const InputField: React.FC<{ onAdd(title: string): void }> = () => {
   //   };
   const handleKeyPress = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
-      console.log(ref.current!.value);
+      props.onAdd(ref.current!.value);
       ref.current!.value = "";
       //setstate("");
     }
