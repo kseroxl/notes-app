@@ -2,7 +2,6 @@
   list-style: none;
 }
 .note {
-  overflow-wrap: break-word;
   padding: 10px;
   background-color: rgba(46, 130, 248, 1);
   color: white;
@@ -24,9 +23,11 @@
 }
 .checkbox-label {
   position: relative;
-  word-wrap: break-word;
   display: inline-block;
   text-indent: 40px;
+  overflow-wrap: break-word;
+  text-align: justify;
+  margin-right: 20px;
 }
 .hint {
   top: -15px;

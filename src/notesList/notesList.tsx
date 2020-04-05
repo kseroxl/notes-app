@@ -7,7 +7,7 @@ interface INotesList {
   notes: INote[];
   toggleImportant: (id: number) => void;
   onDeleteNote: (id: number) => void;
-  setSection: (section: string) => void;
+  setSection: (section: string, id: number) => void;
 }
 
 const NotesList: React.FC<INotesList> = ({
@@ -49,7 +49,9 @@ const NotesList: React.FC<INotesList> = ({
                 </label>
               </div>
               <IconsSet
+                currentSection={note.section}
                 setSection={setSection}
+                id={note.id}
                 onDeleteClick={() => onDeleteNote(note.id)}
               />
             </li>

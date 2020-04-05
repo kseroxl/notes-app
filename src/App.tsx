@@ -4,7 +4,8 @@ import NavBar from "./NavBar/NavBar";
 import ContentBox from "./ContentBox/ContentBox";
 import InputField from "./InputField/InputField";
 import NotesList from "./notesList/notesList";
-import { INote, sections } from "./interfaces";
+import { INote } from "./interfaces";
+import { sections } from "./interfaces";
 
 const App: React.FC = () => {
   const [notes, setNotes] = useState<INote[]>([]);
@@ -15,7 +16,7 @@ const App: React.FC = () => {
         title: title,
         id: Date.now(),
         important: false,
-        section: sections.NONE,
+        section: sections[4],
       };
       setNotes((prev) => SortNotes([newNote, ...prev]));
     }
@@ -29,8 +30,17 @@ const App: React.FC = () => {
     });
   };
 
-  const setSection = (section: string): void => {
-    console.log(section);
+  const setSection = (section: string, id: number): void => {
+    console.log(id);
+    setNotes(() => {
+      const allNotes = notes.map((note) => {
+        if (note.id === id) {
+          note.section = section;
+        }
+        return note;
+      });
+      return SortNotes(allNotes);
+    });
   };
 
   const toggleImportant = (id: number) => {

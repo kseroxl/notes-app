@@ -2,7 +2,7 @@ export interface INote {
   title: string;
   id: number;
   important: boolean;
-  section: number;
+  section: string;
 }
 
 export enum sections {
