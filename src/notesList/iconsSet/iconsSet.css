@@ -19,16 +19,18 @@
 .icons-set div div:hover {
   transform: scale(1.1);
 }
-.icons-set div:nth-child(1) div {
+.icons-set #education-icon {
   background-color: #2071a7;
 }
-.icons-set div:nth-child(2) div {
+.icons-set #sport-icon {
   background-color: #19b849;
 }
-.icons-set div:nth-child(3) div {
+.icons-set #art-icon {
   background-color: #ee9919;
 }
 .icons-set .hint {
   z-index: 2;
   left: -40px;
+  top: -30px;
+  overflow-wrap: normal;
 }
