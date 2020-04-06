@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./notesList.css";
 import { INote } from "../interfaces";
-import IconsSet from "./iconsSet/iconsSet";
+import OneNote from "./oneNote/OneNote";
 
 interface INotesList {
   notes: INote[];
@@ -16,13 +16,6 @@ const NotesList: React.FC<INotesList> = ({
   onDeleteNote,
   setSection,
 }) => {
-  const [hint, showHint] = useState(-1);
-  const setHint = (id: number): void => {
-    showHint(id);
-  };
-  const unsetHint = () => {
-    showHint(-1);
-  };
   return (
     <>
       <ul className="notes">
@@ -30,31 +23,13 @@ const NotesList: React.FC<INotesList> = ({
           const classes = ["checkbox-label"];
           if (note.important) classes.push("important");
           return (
-            <li className="note" key={note.id}>
-              <div className="input-checkbox">
-                <span
-                  className={`hint ${hint === note.id ? `active-hint` : ""}`}
-                >
-                  {note.important ? "Important" : "Make important"}
-                </span>
-                <input
-                  type="checkbox"
-                  checked={note.important}
-                  onChange={() => toggleImportant(note.id)}
-                  onMouseOver={() => setHint(note.id)}
-                  onMouseOut={() => unsetHint()}
-                />
-                <label className={classes.join(" ")} htmlFor={note.title}>
-                  {note.title}
-                </label>
-              </div>
-              <IconsSet
-                currentSection={note.section}
-                setSection={setSection}
-                id={note.id}
-                onDeleteClick={() => onDeleteNote(note.id)}
-              />
-            </li>
+            <OneNote
+              toggleImportant={toggleImportant}
+              onDeleteNote={onDeleteNote}
+              setSection={setSection}
+              note={note}
+              classes={classes}
+            />
           );
         })}
       </ul>

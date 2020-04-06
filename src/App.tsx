@@ -35,7 +35,7 @@ const App: React.FC = () => {
     setNotes(() => {
       const allNotes = notes.map((note) => {
         if (note.id === id) {
-          if (note.section == section) {
+          if (note.section === section) {
             note.section = "";
           } else note.section = section;
         }

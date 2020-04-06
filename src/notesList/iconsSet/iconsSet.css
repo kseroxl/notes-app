@@ -32,5 +32,11 @@
   z-index: 2;
   left: -40px;
   top: -30px;
-  overflow-wrap: normal;
+  width: auto;
+}
+.icons-set .hint p {
+  margin: 0;
+}
+.icons-set .hint p span {
+  font-weight: 800;
 }

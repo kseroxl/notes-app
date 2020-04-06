@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ReactElement } from "react";
 import "./iconsSet.css";
 import { faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 import { faVolleyballBall } from "@fortawesome/free-solid-svg-icons";
@@ -19,16 +19,44 @@ const IconsSet: React.FC<{
   const unsetHint = () => {
     showHint("");
   };
+  const makeHint: React.StatelessComponent<{
+    hintTextFirst: string;
+    hintTextSecond: string;
+    sectionText: string;
+    sectionId: number;
+  }> = (hintTextFirst, hintTextSecond, sectionText, sectionId) => {
+    return (
+      <>
+        <span className="active-hint">
+          {
+            <p>
+              {currentSection !== sections[sectionId]
+                ? `${hintTextFirst}`
+                : `${hintTextSecond}`}
+              <span>{sectionText}</span>
+            </p>
+          }
+        </span>
+      </>
+    );
+  };
   return (
     <div className="icons-set">
       {((currentSection && currentSection === sections[0]) ||
         !currentSection) && (
         <div>
-          <span className={`hint ${hint === sections[0] ? `active-hint` : ""}`}>
-            {currentSection === sections[0]
-              ? "Added"
-              : "Add to section education"}
-          </span>
+          {hint === sections[0] &&
+            makeHint("Add to section", "Added to", "education", 0)}
+          {/* <span className={`hint ${hint === sections[0] ? `active-hint` : ""}`}>
+            {
+              <p>
+                {currentSection !== sections[0]
+                  ? `Add to section`
+                  : `Added to `}{" "}
+                <span>education</span>
+              </p>
+            }
+          </span> */}
           <div
             id="education-icon"
             onMouseOver={() => setHint(sections[0])}
@@ -43,7 +71,14 @@ const IconsSet: React.FC<{
         !currentSection) && (
         <div>
           <span className={`hint ${hint === sections[1] ? `active-hint` : ""}`}>
-            {currentSection === sections[1] ? "Added" : "Add to section sport"}
+            {
+              <p>
+                {currentSection !== sections[1]
+                  ? `Add to section`
+                  : `Added to `}{" "}
+                <span>sport</span>
+              </p>
+            }
           </span>
           <div
             id="sport-icon"
@@ -59,7 +94,14 @@ const IconsSet: React.FC<{
         !currentSection) && (
         <div>
           <span className={`hint ${hint === sections[2] ? `active-hint` : ""}`}>
-            {currentSection === sections[2] ? "Added" : "Add to section art"}
+            {
+              <p>
+                {currentSection !== sections[2]
+                  ? `Add to section`
+                  : `Added to `}{" "}
+                <span>art</span>
+              </p>
+            }
           </span>
           <div
             id="art-icon"
