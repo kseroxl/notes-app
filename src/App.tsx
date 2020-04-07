@@ -22,6 +22,19 @@ const App: React.FC = () => {
     }
   };
 
+  const editNote = (text: string, id: number): void => {
+    console.log("Text ", text);
+    console.log("Id ", id);
+    setNotes(() => {
+      return notes.map((note) => {
+        if (note.id === id) {
+          note.title = text;
+        }
+        return note;
+      });
+    });
+  };
+
   const SortNotes = (allNotes: INote[]): INote[] => {
     return allNotes.sort((a, b) => {
       if (a.important && !b.important) return -1;
@@ -67,6 +80,7 @@ const App: React.FC = () => {
       <ContentBox>
         <InputField onAdd={onAddNote} />
         <NotesList
+          editNote={editNote}
           setSection={setSection}
           notes={notes}
           toggleImportant={toggleImportant}

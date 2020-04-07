@@ -1,13 +1,14 @@
 import React from "react";
 import "./notesList.css";
 import { INote } from "../interfaces";
-import OneNote from "./oneNote/OneNote";
+import OneNote from "./oneNote/oneNote";
 
 interface INotesList {
   notes: INote[];
   toggleImportant: (id: number) => void;
   onDeleteNote: (id: number) => void;
   setSection: (section: string, id: number) => void;
+  editNote: (text: string, id: number) => void;
 }
 
 const NotesList: React.FC<INotesList> = ({
@@ -15,6 +16,7 @@ const NotesList: React.FC<INotesList> = ({
   toggleImportant,
   onDeleteNote,
   setSection,
+  editNote,
 }) => {
   return (
     <>
@@ -29,6 +31,7 @@ const NotesList: React.FC<INotesList> = ({
               setSection={setSection}
               note={note}
               classes={classes}
+              editNote={editNote}
             />
           );
         })}

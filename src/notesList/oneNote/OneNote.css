@@ -9,6 +9,8 @@
   display: flex;
   justify-content: space-between;
   position: relative;
+  cursor: pointer;
+  height: auto;
 }
 .input-checkbox input[type="checkbox"] {
   opacity: 0;
@@ -18,13 +20,16 @@
   height: 22px;
   width: 22px;
 }
+.input-checkbox {
+  max-width: 90%;
+}
 .checkbox-label {
-  position: relative;
   display: inline-block;
   text-indent: 40px;
   overflow-wrap: break-word;
   text-align: justify;
   margin-right: 20px;
+  max-width: 99%;
 }
 .hint {
   top: -15px;
@@ -68,4 +73,16 @@
 .times-sign {
   justify-self: flex-end;
   cursor: pointer;
+}
+.note-input {
+  position: absolute;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  width: 80%;
+
+  display: inline-block;
+  overflow-wrap: break-word;
+  text-align: justify;
 }

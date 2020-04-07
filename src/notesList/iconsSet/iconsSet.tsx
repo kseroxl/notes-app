@@ -1,4 +1,4 @@
-import React, { useState, ReactElement } from "react";
+import React, { useState } from "react";
 import "./iconsSet.css";
 import { faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 import { faVolleyballBall } from "@fortawesome/free-solid-svg-icons";
@@ -19,25 +19,23 @@ const IconsSet: React.FC<{
   const unsetHint = () => {
     showHint("");
   };
-  const makeHint: React.StatelessComponent<{
-    hintTextFirst: string;
-    hintTextSecond: string;
-    sectionText: string;
-    sectionId: number;
-  }> = (hintTextFirst, hintTextSecond, sectionText, sectionId) => {
+  const makeHint = (
+    hintTextFirst: string,
+    hintTextSecond: string,
+    sectionText: string,
+    sectionId: number
+  ) => {
     return (
-      <>
-        <span className="active-hint">
-          {
-            <p>
-              {currentSection !== sections[sectionId]
-                ? `${hintTextFirst}`
-                : `${hintTextSecond}`}
-              <span>{sectionText}</span>
-            </p>
-          }
-        </span>
-      </>
+      <span className=" hint active-hint">
+        {
+          <p>
+            {currentSection !== sections[sectionId]
+              ? `${hintTextFirst}`
+              : `${hintTextSecond}`}
+            <span>{sectionText}</span>
+          </p>
+        }
+      </span>
     );
   };
   return (
@@ -46,17 +44,7 @@ const IconsSet: React.FC<{
         !currentSection) && (
         <div>
           {hint === sections[0] &&
-            makeHint("Add to section", "Added to", "education", 0)}
-          {/* <span className={`hint ${hint === sections[0] ? `active-hint` : ""}`}>
-            {
-              <p>
-                {currentSection !== sections[0]
-                  ? `Add to section`
-                  : `Added to `}{" "}
-                <span>education</span>
-              </p>
-            }
-          </span> */}
+            makeHint("Add to section ", "Added to ", "education", 0)}
           <div
             id="education-icon"
             onMouseOver={() => setHint(sections[0])}
@@ -70,16 +58,8 @@ const IconsSet: React.FC<{
       {((currentSection && currentSection === sections[1]) ||
         !currentSection) && (
         <div>
-          <span className={`hint ${hint === sections[1] ? `active-hint` : ""}`}>
-            {
-              <p>
-                {currentSection !== sections[1]
-                  ? `Add to section`
-                  : `Added to `}{" "}
-                <span>sport</span>
-              </p>
-            }
-          </span>
+          {hint === sections[1] &&
+            makeHint("Add to section ", "Added to ", "sport", 0)}
           <div
             id="sport-icon"
             onMouseOver={() => setHint(sections[1])}
@@ -93,16 +73,8 @@ const IconsSet: React.FC<{
       {((currentSection && currentSection === sections[2]) ||
         !currentSection) && (
         <div>
-          <span className={`hint ${hint === sections[2] ? `active-hint` : ""}`}>
-            {
-              <p>
-                {currentSection !== sections[2]
-                  ? `Add to section`
-                  : `Added to `}{" "}
-                <span>art</span>
-              </p>
-            }
-          </span>
+          {hint === sections[2] &&
+            makeHint("Add to section ", "Added to ", "art", 0)}
           <div
             id="art-icon"
             onMouseOver={() => setHint(sections[2])}
