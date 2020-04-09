@@ -21,11 +21,12 @@ const NotesList: React.FC<INotesList> = ({
   return (
     <>
       <ul className="notes">
-        {notes.map((note) => {
+        {notes.map((note, id) => {
           const classes = ["checkbox-label"];
           if (note.important) classes.push("important");
           return (
             <OneNote
+              key={id}
               toggleImportant={toggleImportant}
               onDeleteNote={onDeleteNote}
               setSection={setSection}

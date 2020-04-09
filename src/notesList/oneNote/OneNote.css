@@ -10,7 +10,7 @@
   justify-content: space-between;
   position: relative;
   cursor: pointer;
-  height: auto;
+  /* height: auto; */
 }
 .input-checkbox input[type="checkbox"] {
   opacity: 0;
@@ -80,9 +80,10 @@
   font-weight: 600;
   border: none;
   outline: none;
-  width: 80%;
+  width: 88%;
 
   display: inline-block;
   overflow-wrap: break-word;
   text-align: justify;
+  border-radius: 3px;
 }

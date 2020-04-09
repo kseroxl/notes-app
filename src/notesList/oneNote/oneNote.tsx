@@ -23,17 +23,16 @@ const OneNote: React.FC<IOneNote> = ({
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [hint, showHint] = useState(-1);
   const [editing, setEditing] = useState(false);
-  const [content, setContent] = useState(note.title);
+  const [content, setContent] = useState("");
   const setHint = (id: number): void => {
-    console.log(content);
     showHint(id);
   };
   const unsetHint = () => {
     showHint(-1);
   };
   const makeInput = () => {
-    console.log(note);
     setEditing(true);
+    setContent(note.title);
   };
   const handleKeyPress = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
@@ -46,20 +45,31 @@ const OneNote: React.FC<IOneNote> = ({
     setContent(event.currentTarget.value);
   };
 
-  console.log(note);
   return (
-    <li onDoubleClick={() => makeInput()} className="note">
+    <li
+      style={
+        editing && inputRef.current
+          ? { height: `${inputRef.current!.clientHeight}px` }
+          : {}
+      }
+      onDoubleClick={() => makeInput()}
+      className="note"
+    >
       <div className="input-checkbox">
-        <span className={`hint ${hint === note.id ? `active-hint` : ""}`}>
-          {note.important ? "Important" : "Make important"}
-        </span>
-        <input
-          type="checkbox"
-          checked={note.important}
-          onChange={() => toggleImportant(note.id)}
-          onMouseOver={() => setHint(note.id)}
-          onMouseOut={() => unsetHint()}
-        />
+        {!editing && (
+          <>
+            <span className={`hint ${hint === note.id ? `active-hint` : ""}`}>
+              {note.important ? "Important" : "Make important"}
+            </span>
+            <input
+              type="checkbox"
+              checked={note.important}
+              onChange={() => toggleImportant(note.id)}
+              onMouseOver={() => setHint(note.id)}
+              onMouseOut={() => unsetHint()}
+            />
+          </>
+        )}
         {!editing ? (
           <label className={classes.join(" ")} htmlFor={note.title}>
             {note.title}
