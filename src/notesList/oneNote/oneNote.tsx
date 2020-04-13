@@ -26,12 +26,11 @@ const OneNote: React.FC<IOneNote> = ({
   const [hint, showHint] = useState(-1);
   const [editing, setEditing] = useState(false);
   const [content, setContent] = useState("");
-  const [isRendered, setRendered] = useState(false);
 
   useEffect(() => {
     console.log(inputRef.current!.clientHeight);
-    setTimeout(() => setRendered(true), 1000);
-  }, []);
+    console.log(liRef.current.getAttribute(style));
+  }, [editing]);
 
   const style: CSS.Properties = {
     display: `none`,
@@ -54,13 +53,26 @@ const OneNote: React.FC<IOneNote> = ({
   const handleKeyPress = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
       if (editing) setEditing(false);
-      setRendered(false);
       editNote(content, note.id);
     }
   };
+
+  const autosize = () => {
+    const rows = inputRef.current!.rows;
+    const value = inputRef.current!.value;
+    const lines = value.split("\n");
+    const cols = inputRef.current!.cols;
+    let linecount = 0;
+    lines.forEach((el) => (linecount += Math.ceil(el.length / cols)));
+    if (linecount > 2) inputRef.current!.rows = linecount;
+    console.log(lines, linecount);
+    console.log(rows, value);
+  };
+
   const handleChange = (event: React.FormEvent<HTMLTextAreaElement>) => {
     console.log(event.currentTarget.value);
     setContent(event.currentTarget.value);
+    autosize();
   };
 
   return (
@@ -85,7 +97,6 @@ const OneNote: React.FC<IOneNote> = ({
             />
           </>
         )}
-        {/* {!editing ? ( */}
         <label
           style={editing ? style : style2}
           className={classes.join(" ")}
@@ -93,7 +104,6 @@ const OneNote: React.FC<IOneNote> = ({
         >
           {note.title}
         </label>
-        {/* ) : ( */}
         <textarea
           style={!editing ? style : style2}
           onChange={(e) => handleChange(e)}
@@ -101,8 +111,9 @@ const OneNote: React.FC<IOneNote> = ({
           onKeyPress={handleKeyPress}
           value={content}
           className="note-input"
+          rows={2}
+          cols={100}
         ></textarea>
-        {/* )} */}
       </div>
       <IconsSet
         currentSection={note.section}
