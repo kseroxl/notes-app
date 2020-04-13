@@ -28,8 +28,11 @@ const OneNote: React.FC<IOneNote> = ({
   const [content, setContent] = useState("");
 
   useEffect(() => {
-    console.log(inputRef.current!.clientHeight);
-    console.log(liRef.current.getAttribute(style));
+    if (editing)
+      liRef.current!.setAttribute(
+        "style",
+        `height: ${inputRef.current!.clientHeight}px`
+      );
   }, [editing]);
 
   const style: CSS.Properties = {
@@ -65,12 +68,9 @@ const OneNote: React.FC<IOneNote> = ({
     let linecount = 0;
     lines.forEach((el) => (linecount += Math.ceil(el.length / cols)));
     if (linecount > 2) inputRef.current!.rows = linecount;
-    console.log(lines, linecount);
-    console.log(rows, value);
   };
 
   const handleChange = (event: React.FormEvent<HTMLTextAreaElement>) => {
-    console.log(event.currentTarget.value);
     setContent(event.currentTarget.value);
     autosize();
   };
